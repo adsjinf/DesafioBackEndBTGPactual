@@ -11,6 +11,8 @@ import tech.buildrun.btgpactual.DesafioBackEndBTGPactual.controller.dto.OrderRes
 import tech.buildrun.btgpactual.DesafioBackEndBTGPactual.controller.dto.PaginationResponse;
 import tech.buildrun.btgpactual.DesafioBackEndBTGPactual.service.OrderService;
 
+import java.util.Map;
+
 @RestController
 public class OrderController {
 
@@ -23,8 +25,9 @@ public class OrderController {
     @GetMapping("/customers/{customerId}/orders")
     public ResponseEntity<ApiResponse<OrderResponse>> listOrders(@PathVariable("customerId") Long customerId,
                                                                  @RequestParam(name = "page", defaultValue = "0") Integer page,
-                                                                 @RequestParam(name = "pageSize", defaultValue = "0") Integer pageSize){
-        var pageResponse = orderService.findAllByCustomerId(customerId, PageRequest.of(page, pageSize));
+                                                                 @RequestParam(name = "pageSize", defaultValue = "10")  Integer pageSize){
+
+       var pageResponse = orderService.findAllByCustomerId(customerId, PageRequest.of(page, pageSize));
 
         return ResponseEntity.ok(new ApiResponse<>(
                 pageResponse.getContent(),
