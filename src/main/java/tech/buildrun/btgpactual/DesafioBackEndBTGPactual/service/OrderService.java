@@ -2,7 +2,6 @@ package tech.buildrun.btgpactual.DesafioBackEndBTGPactual.service;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.querydsl.QPageRequest;
 import org.springframework.stereotype.Service;
 import tech.buildrun.btgpactual.DesafioBackEndBTGPactual.controller.dto.OrderResponse;
 import tech.buildrun.btgpactual.DesafioBackEndBTGPactual.entity.OrderEntity;
@@ -26,7 +25,7 @@ public class OrderService {
         var entity = new OrderEntity();
 
         entity.setOrderId(event.codigoPedido());
-        entity.setCustomerId(event.codigoClente());
+        entity.setCustomerId(event.codigoCliente());
         entity.setItens(getOrderItens(event));
         entity.setTotal(getTotal(event));
 
