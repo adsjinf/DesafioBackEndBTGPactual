@@ -27,9 +27,12 @@ public class OrderController {
                                                                  @RequestParam(name = "page", defaultValue = "0") Integer page,
                                                                  @RequestParam(name = "pageSize", defaultValue = "10")  Integer pageSize){
 
-       var pageResponse = orderService.findAllByCustomerId(customerId, PageRequest.of(page, pageSize));
+        var pageResponse = orderService.findAllByCustomerId(customerId, PageRequest.of(page, pageSize));
+        var totalOnOrders = orderService.findTotalOnOrdersByCustomerId(customerId);
+
 
         return ResponseEntity.ok(new ApiResponse<>(
+                Map.of("totalOnOrders", totalOnOrders),
                 pageResponse.getContent(),
                 PaginationResponse.fromPage(pageResponse)
         ));
